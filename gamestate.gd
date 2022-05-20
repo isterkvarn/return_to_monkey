@@ -1,7 +1,7 @@
 extends Node
 
 const SERVER_PORT = 10555
-const SERVER_IP = "172.20.32.1"
+const SERVER_IP = "slartibartfast.lysator.liu.se"
 const MAX_PEERS = 12
 
 var peer = null
@@ -28,13 +28,13 @@ func _player_connected(id):
 	add_player(id)
 
 remote func add_player(id):
-	var map = get_tree().get_root().get_node("map")
+	var map = get_tree().get_root().get_node("main").get_node("map")
 	var player = load("res://player.tscn").instance()
-	var spawn_pos = map.get_node("SpawnPoint").position
+	#var spawn_pos = map.get_node("SpawnPoint").position
 	
 	# Init player and add to map
 	player.set_name(str(id)) # Standard ID for server
-	player.position = spawn_pos
+	#player.position = spawn_pos
 	map.get_node("Players").add_child(player)
 
 func join_game(new_player_name):
