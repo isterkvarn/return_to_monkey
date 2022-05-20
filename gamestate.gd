@@ -59,7 +59,7 @@ func setup_map(id):
 	var player = load("res://Player.tscn").instance()
 	#var spawn_pos = map.get_node("SpawnPoint").position
 	
-	get_tree().get_root().add_child(map)
+	get_tree().get_root().get_node("main").add_child(map)
 	get_tree().get_root().get_node("main").get_node("Control").hide()
 	
 	# Init player and add to map
