@@ -18,6 +18,10 @@ config/name="Return To Monkey"
 run/main_scene="res://main.tscn"
 config/icon="res://Assets/icon.png"
 
+[autoload]
+
+Gamestate="*res://gamestate.gd"
+
 [input]
 
 jump={
