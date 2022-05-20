@@ -12,6 +12,14 @@ var players = {}
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
+	get_tree().connect("connected_to_server", self, "_connected_ok")
+	get_tree().connect("connection_failed", self, "_connected_fail")
+	
+func _connected_fail():
+	print("Connection Failed")
+
+func _connected_ok():
+	print("Connected!")
 
 func _player_connected(id):
 	# give new peer info
