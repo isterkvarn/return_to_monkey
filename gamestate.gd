@@ -25,7 +25,7 @@ func _player_connected(id):
 	# give new peer info
 	print(str(id) + "connected")
 	rpc_id(id, "add_player", peer.get_unique_id())
-	add_player(id)
+	#add_player(id)
 
 remote func add_player(id):
 	var map = get_tree().get_root().get_node("main").get_node("map")
@@ -38,7 +38,7 @@ remote func add_player(id):
 	map.get_node("Players").add_child(player)
 
 func join_game(new_player_name):
-		# Set up network peer
+	# Set up network peer
 	peer = NetworkedMultiplayerENet.new()
 	peer.create_client(SERVER_IP, SERVER_PORT)
 	get_tree().set_network_peer(peer)
