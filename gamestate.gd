@@ -32,7 +32,7 @@ remote func add_player(id):
 func join_game(new_player_name):
 		# Set up network peer
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_client(SERVER_PORT, MAX_PEERS)
+	peer.create_client(SERVER_IP, SERVER_PORT)
 	get_tree().set_network_peer(peer)
 	# setup map
 	setup_map(peer.get_unique_id())
@@ -40,7 +40,7 @@ func join_game(new_player_name):
 func host_game(new_player_name):
 	# Set up network peer
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_server(SERVER_IP, SERVER_PORT)
+	peer.create_server(SERVER_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
 	# setup map
 	setup_map(peer.get_unique_id())
@@ -48,13 +48,14 @@ func host_game(new_player_name):
 func setup_map(id):
 	# Get and load map, player and spawnpoint
 	var map = load("res://map.tscn").instance()
-	var player = load("res://player.tscn").instance()
-	var spawn_pos = map.get_node("SpawnPoint").position
+	var player = load("res://Player.tscn").instance()
+	#var spawn_pos = map.get_node("SpawnPoint").position
 	
 	get_tree().get_root().add_child(map)
+	get_tree().get_root().get_node("main").get_node("Control").hide()
 	
 	# Init player and add to map
-	player.set_name(id) # Standard ID for server
-	player.position = spawn_pos
+	player.set_name(str(id)) # Standard ID for server
+	#player.position = spawn_pos
 	player.set_network_master(id)
 	map.get_node("Players").add_child(player)
