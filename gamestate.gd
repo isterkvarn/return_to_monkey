@@ -29,7 +29,7 @@ func _player_connected(id):
 
 remote func add_player(id):
 	var map = get_tree().get_root().get_node("main").get_node("map")
-	var player = load("res://player.tscn").instance()
+	var player = load("res://Player.tscn").instance()
 	#var spawn_pos = map.get_node("SpawnPoint").position
 	
 	# Init player and add to map
