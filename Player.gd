@@ -8,11 +8,10 @@ const JUMP_FORCE = 400
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
 const START_BULLETS = 3
-
 const MAX_HP = 3
 const START_HP = MAX_HP
 
-var bullets = START_HP
+var bullets = START_BULLETS
 var vel = Vector2()
 var jumps = -1
 var hp = START_HP
@@ -34,11 +33,13 @@ func _ready():
 	pass # Replace with function body.
 
 func _input(event):
-	if event is InputEventMouseButton and event.pressed and is_network_master():
+	if event is InputEventMouseButton and \
+	event.pressed and bullets > 0 and is_network_master():
 		var bullet_info = {}
 		bullet_info["pos"] = global_position
 		bullet_info["angle"] = get_angle_to(get_global_mouse_position())
 		rpc("fire", bullet_info)
+		bullets -= 1
  
 master func hit_by_bullet(from):
 	print("APA NERE")
@@ -52,7 +53,6 @@ master func hit_by_bullet(from):
 
 func pick_up_banana():
 	bullets = 3
-	print("Bullets", bullets)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
