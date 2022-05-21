@@ -8,8 +8,13 @@ const JUMP_FORCE = 400
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
 
+const MAX_HP = 3
+const START_HP = MAX_HP
+
+
 var vel = Vector2()
 var jumps = -1
+var hp = START_HP
 
 var puppet_pos = position
 var puppet_vel = vel
@@ -29,7 +34,11 @@ func _input(event):
 		rpc("fire", bullet_info)
  
 func hit_by_bullet():
-	print("MAN DOWN")
+	if hp == 1:
+		print("APA NERE")
+	else:
+		print("APA TRÄFFAD")
+		hp -= 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
