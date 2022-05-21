@@ -47,7 +47,6 @@ func _input(event):
 		else:
 			bullet_fire_helper(global_position, angle)
 			bullets -= 1
-		bullet_checker()
 	
 	# scroll up
 	if event is InputEventMouseButton and event.button_index == 4 and 2 > get_node("Camera2D").zoom.length():
@@ -55,9 +54,9 @@ func _input(event):
 	# scroll down
 	if event is InputEventMouseButton and event.button_index == 5 and 0.1 < get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= ZOOM_SPEED
-		
+	rpc("bullet_checker")
 
-func bullet_checker():
+remotesync func bullet_checker():
 	if bullets == 0:
 		sprite_banana.hide()
 	else:
