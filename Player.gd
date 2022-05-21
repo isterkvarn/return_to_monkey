@@ -31,6 +31,7 @@ onready var sprite_banana = get_node("sprites/sprite_banana")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	preload("res://bullet.tscn")
+	preload("res://dead_monkey.tscn")
 	set_safe_margin(0.1)
 
 func _input(event):
@@ -65,8 +66,14 @@ func bullet_fire_helper(pos, angle):
 	rpc("fire", {"pos":pos, "angle":angle})
 
  
-master func hit_by_bullet():
+master func hit_by_bullet(speed):
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
+	rpc("create_body", speed, Gamestate.color_hue)
+	
+remotesync func create_body(speed, color):
+	var body = load("res://dead_monkey.tscn").instance()
+	body.get_node("sprites").get_node("sprite_pants").modulate = Color.from_hsv(color,0.8,0.9,1)
+	body.velocity = speed
 
 remote func killed(from):
 	deaths += 1
