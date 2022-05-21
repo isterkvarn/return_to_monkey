@@ -8,4 +8,4 @@ script = ExtResource( 1 )
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_right = 385.0
 margin_bottom = 41.0
-text = "Player	Kills	Deaths"
+text = "Score here"
