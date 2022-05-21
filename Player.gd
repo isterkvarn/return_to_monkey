@@ -16,6 +16,9 @@ var vel = Vector2()
 var jumps = -1
 var hp = START_HP
 
+var kills = 0
+var deaths = 0
+
 var puppet_pos = position
 var puppet_vel = vel
 
@@ -38,10 +41,14 @@ func _input(event):
 		rpc("fire", bullet_info)
 		bullets -= 1
  
-master func hit_by_bullet():
+master func hit_by_bullet(from):
 	print("APA NERE")
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
-
+	deaths += 1
+	var players = get_tree().get_root().get_node("main").get_node("map").get_node("Players").get_children()
+	for player in players:
+		if player.get_name() == from:
+			player.kills += 1
 
 
 func pick_up_banana():
