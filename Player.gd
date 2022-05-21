@@ -43,14 +43,15 @@ func _input(event):
 		if bullets == 0:
 			remove_banana()
  
-master func hit_by_bullet(from):
+master func hit_by_bullet():
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
+
+remote func killed(from):
 	deaths += 1
 	var players = get_tree().get_root().get_node("main").get_node("map").get_node("Players").get_children()
 	for player in players:
 		if player.get_name() == from:
 			player.kills += 1
-
 
 func pick_up_banana():
 	bullets = 3
