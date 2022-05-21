@@ -99,6 +99,11 @@ func _process(delta):
 	if not is_on_floor():
 		sprite.play("falling")
 		
+	if is_on_ceiling():
+		sprite.flip_v = true
+	else:
+		sprite.flip_v = false
+		
 	move_and_slide(vel, Vector2.UP)
 	
 	if not is_network_master():
