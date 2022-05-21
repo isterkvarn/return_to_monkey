@@ -67,13 +67,16 @@ func bullet_fire_helper(pos, angle):
 
  
 master func hit_by_bullet(speed):
+	var old_position =  Vector2(global_position.x, global_position.y-20)
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
-	rpc("create_body", speed, Gamestate.color_hue)
+	rpc("create_body", speed, Gamestate.color_hue, old_position)
 	
-remotesync func create_body(speed, color):
+remotesync func create_body(speed, color, death_position):
 	var body = load("res://dead_monkey.tscn").instance()
 	body.get_node("sprites").get_node("sprite_pants").modulate = Color.from_hsv(color,0.8,0.9,1)
-	body.velocity = speed
+	body.set_linear_velocity(speed.clamped(1))
+	body.position = death_position
+	get_tree().get_root().get_node("main").get_node("map").add_child(body)
 
 remote func killed(from):
 	deaths += 1

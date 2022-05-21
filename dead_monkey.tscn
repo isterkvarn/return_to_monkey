@@ -12,7 +12,8 @@
 bounce = 1.0
 
 [sub_resource type="CapsuleShape2D" id=1]
-height = 11.3846
+radius = 8.0
+height = 0.0
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -42,14 +43,15 @@ script = ExtResource( 7 )
 position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
-[node name="sprites" type="Node2D" parent="CollisionShape2D"]
+[node name="sprites" type="Node2D" parent="."]
+position = Vector2( 0, 0.5 )
 
-[node name="sprite_body" type="Sprite" parent="CollisionShape2D/sprites"]
+[node name="sprite_body" type="Sprite" parent="sprites"]
 texture = ExtResource( 1 )
 
-[node name="sprite_pants" type="Sprite" parent="CollisionShape2D/sprites"]
+[node name="sprite_pants" type="Sprite" parent="sprites"]
 texture = ExtResource( 5 )
 
-[node name="sprite_feet" type="AnimatedSprite" parent="CollisionShape2D/sprites"]
+[node name="sprite_feet" type="AnimatedSprite" parent="sprites"]
 frames = SubResource( 2 )
 playing = true
