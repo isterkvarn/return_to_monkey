@@ -39,7 +39,7 @@ margin_top = 72.0
 margin_right = 700.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 0, 20 )
-text = "NAME:"
+hint_tooltip = "Enter name"
 
 [connection signal="pressed" from="VBoxContainer/HOST" to="." method="_on_HOST_pressed"]
 [connection signal="pressed" from="VBoxContainer/JOIN" to="." method="_on_JOIN_pressed"]

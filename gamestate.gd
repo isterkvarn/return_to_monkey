@@ -24,7 +24,7 @@ func _connected_ok():
 
 func _player_connected(id):
 	# give new peer info
-	print(str(id) + "connected")
+	print(str(id) + " connected")
 	rpc_id(id, "add_player", peer.get_unique_id())
 
 	
@@ -39,6 +39,7 @@ remote func add_player(id):
 	# Init player and add to map
 	player.set_name(str(id)) # Standard ID for server
 	player.set_network_master(id)
+	player.get_node("Label").set_text(player_name)
 	#player.position = spawn_pos
 	map.get_node("Players").add_child(player)
 
@@ -52,6 +53,8 @@ func join_game(new_player_name):
 	peer.create_client(SERVER_IP, SERVER_PORT)
 	get_tree().set_network_peer(peer)
 	# setup map
+	if new_player_name != "":
+		player_name = new_player_name
 	setup_map(peer.get_unique_id())
 
 func host_game(new_player_name):
@@ -60,6 +63,8 @@ func host_game(new_player_name):
 	peer.create_server(SERVER_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
 	# setup map
+	if new_player_name != "":
+		player_name = new_player_name
 	setup_map(peer.get_unique_id())
 	
 func setup_map(id):
@@ -72,8 +77,12 @@ func setup_map(id):
 	get_tree().get_root().get_node("main").get_node("Control").hide()
 	
 	# Init player and add to map
-	player.set_name(str(id)) # Standard ID for server
+	player.set_name(str(id))
 	player.get_node("Camera2D").current = true
 	#player.position = spawn_pos
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	player.get_node("sprites").get_node("sprite_pants").modulate = Color.from_hsv(rng.randf_range(0, 1.0),0.8,0.9,1)
+	player.get_node("Label").set_text(player_name)
 	player.set_network_master(id)
 	map.get_node("Players").add_child(player)
