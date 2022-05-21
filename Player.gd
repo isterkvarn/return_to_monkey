@@ -47,14 +47,13 @@ func _input(event):
 		else:
 			bullet_fire_helper(global_position, angle)
 			bullets -= 1
-	
+		sprite_banana.show()
 	# scroll up
 	if event is InputEventMouseButton and event.button_index == 4 and 1.5 > get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= 1/ZOOM_SPEED
 	# scroll down
 	if event is InputEventMouseButton and event.button_index == 5 and 0.1 < get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= ZOOM_SPEED
-	rpc("hide_banana", bullets == 0)
 
 remotesync func hide_banana(hidden):
 	if hidden:
