@@ -33,8 +33,8 @@ func _on_Area2D_body_entered(body):
 	if player_id != parent_id:
 		# Colliding with a player
 		if body.has_method("hit_by_bullet"):
-			body.rpc("hit_by_bullet", parent_id)
-		if body.has_method("kiled"):
+			body.rpc("hit_by_bullet")
+		if body.has_method("killed"):
 			body.killed(parent_id)
 		# Colliding with the map
 		rpc("remove")
