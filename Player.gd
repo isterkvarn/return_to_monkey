@@ -96,7 +96,7 @@ func _process(delta):
 	if not is_network_master():
 		puppet_pos = position
 
-remote func update_movment(move_dict):
+remote func update_movement(move_dict):
 	print("move")
 	puppet_vel = move_dict["vel"]
 	puppet_pos = move_dict["pos"]
