@@ -20,7 +20,10 @@ var hp = START_HP
 var puppet_pos = position
 var puppet_vel = vel
 
-onready var sprite = get_node("sprite")
+onready var sprite_feet = get_node("sprites/sprite_feet")
+onready var sprite_body = get_node("sprites/sprite_body")
+onready var sprite_pants = get_node("sprites/sprite_pants")
+onready var sprite_banana = get_node("sprites/sprite_banana")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -92,27 +95,43 @@ func _process(delta):
 		
 	# do animation calculation
 	if vel.x > 0.1:
-		sprite.play("running")
-		sprite.flip_h = false
+		sprite_feet.play("running")
+		flip_sprites_h(false)
 		
 	elif vel.x < -0.1:
-		sprite.play("running")
-		sprite.flip_h = true
+		sprite_feet.play("running")
+		flip_sprites_h(true)
 	else:
-		sprite.play("default")
+		sprite_feet.play("default")
 		
 	if not is_on_floor():
-		sprite.play("falling")
+		sprite_feet.play("falling")
 		
 	if is_on_ceiling():
-		sprite.flip_v = true
+		flip_sprites_v(true)
 	else:
-		sprite.flip_v = false
+		flip_sprites_v(false)
 		
 	move_and_slide(vel, Vector2.UP)
 	
 	if not is_network_master():
 		puppet_pos = position
+
+func flip_sprites_v(flipped):
+	sprite_body.flip_v = flipped
+	sprite_feet.flip_v = flipped
+	sprite_pants.flip_v = flipped
+	sprite_banana.flip_v = flipped
+
+func flip_sprites_h(flipped):
+	sprite_body.flip_h = flipped
+	sprite_feet.flip_h = flipped
+	sprite_pants.flip_h = flipped
+	sprite_banana.flip_h = flipped
+	if flipped:
+		sprite_banana.position.x = -20
+	else:
+		sprite_banana.position.x = 20
 
 remotesync func fire(bullet_info):
 	var bulletScene = load("res://bullet.tscn")
