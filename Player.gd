@@ -10,6 +10,7 @@ const DOUBLE_JUMPS = 2
 const START_BULLETS = 3
 const MAX_HP = 3
 const START_HP = MAX_HP
+const ZOOM_SPEED = 0.9;
 
 var bullets = START_BULLETS
 var vel = Vector2()
@@ -30,11 +31,11 @@ onready var sprite_banana = get_node("sprites/sprite_banana")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	preload("res://bullet.tscn")
-	pass # Replace with function body.
+	set_safe_margin(0.1)
 
 func _input(event):
 	if event is InputEventMouseButton and \
-	event.pressed and bullets > 0 and is_network_master():
+	event.pressed and event.button_index == 1 and bullets > 0 and is_network_master():
 		var angle = get_angle_to(get_global_mouse_position())
 		if Input.is_action_pressed("shotgun") and bullets > 2:
 			var spread = PI/8
@@ -47,6 +48,14 @@ func _input(event):
 			bullet_fire_helper(global_position, angle)
 			bullets -= 1
 		bullet_checker()
+	
+	# scroll up
+	if event is InputEventMouseButton and event.button_index == 4 and 2 > get_node("Camera2D").zoom.length():
+		get_node("Camera2D").zoom *= 1/ZOOM_SPEED
+	# scroll down
+	if event is InputEventMouseButton and event.button_index == 5 and 0.1 < get_node("Camera2D").zoom.length():
+		get_node("Camera2D").zoom *= ZOOM_SPEED
+		
 
 func bullet_checker():
 	if bullets == 0:
@@ -109,7 +118,7 @@ func _process(delta):
 			# -1 to stay stuck on the ceiling
 			vel.y = -GRAVITY - 1
 			vel.x *= CEILING_FACTOR
-			jumps = DOUBLE_JUMPS - 1
+			jumps = DOUBLE_JUMPS 
 		
 		var move_dict = {}
 		move_dict["pos"] = position
