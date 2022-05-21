@@ -22,6 +22,7 @@ var puppet_vel = vel
 onready var sprite_feet = get_node("sprites/sprite_feet")
 onready var sprite_body = get_node("sprites/sprite_body")
 onready var sprite_pants = get_node("sprites/sprite_pants")
+onready var sprite_banana = get_node("sprites/sprite_banana")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -115,11 +116,17 @@ func flip_sprites_v(flipped):
 	sprite_body.flip_v = flipped
 	sprite_feet.flip_v = flipped
 	sprite_pants.flip_v = flipped
+	sprite_banana.flip_v = flipped
 
 func flip_sprites_h(flipped):
 	sprite_body.flip_h = flipped
 	sprite_feet.flip_h = flipped
 	sprite_pants.flip_h = flipped
+	sprite_banana.flip_h = flipped
+	if flipped:
+		sprite_banana.position.x = -20
+	else:
+		sprite_banana.position.x = 20
 
 remotesync func fire(bullet_info):
 	var bulletScene = load("res://bullet.tscn")

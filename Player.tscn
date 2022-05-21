@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/monkey/monkey_pants.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/monkey/monkey_feet1.png" type="Texture" id=6]
 [ext_resource path="res://Assets/monkey/monkey_feet2.png" type="Texture" id=7]
 [ext_resource path="res://Assets/monkey/monkey_feet3.png" type="Texture" id=8]
+[ext_resource path="res://Assets/monkey/banana_gun.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 11.3846
@@ -45,6 +46,10 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 3 )
 
 [node name="sprites" type="Node2D" parent="."]
+
+[node name="sprite_banana" type="Sprite" parent="sprites"]
+position = Vector2( 20, -1 )
+texture = ExtResource( 9 )
 
 [node name="sprite_body" type="Sprite" parent="sprites"]
 texture = ExtResource( 5 )

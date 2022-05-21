@@ -1,6 +1,6 @@
 extends Node2D
 
-const BULLET_SPEED = 400
+const BULLET_SPEED = 500
 var speed = Vector2()
 var parent_id
 var removed = false
