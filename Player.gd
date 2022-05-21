@@ -42,6 +42,8 @@ func _process(delta):
 		jumps = DOUBLE_JUMPS
 		vel.y = 0
 		
+	print(name + " : " + str(is_network_master()))
+	
 	if is_network_master():
 		# jumps and double jumps
 		if Input.is_action_just_pressed("jump") and jumps > 0:
