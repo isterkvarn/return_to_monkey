@@ -8,9 +8,12 @@ const JUMP_FORCE = 400
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
 const ID = 1
+const MAX_HP = 3
+const START_HP = MAX_HP
 
 var vel = Vector2()
 var jumps = -1
+var hp = START_HP
 
 var puppet_pos = position
 var puppet_vel = vel
@@ -35,8 +38,12 @@ func _input(event):
 		instance.shoot(global_position, get_angle_to(get_global_mouse_position()))
 
 func hit_by_bullet():
-	print("MAN DOWN")
-
+	if hp == 1:
+		print("APA NERE")
+	else:
+		print("APA TRÄFFAD")
+		hp -= 1
+	
 func get_player_id():
 	return ID
 
@@ -79,7 +86,7 @@ func _process(delta):
 		move_dict["pos"] = position
 		move_dict["vel"] = vel
 		
-		print(name + " : " + str(is_network_master()))
+		# print(name + " : " + str(is_network_master()))
 		
 		rpc_unreliable("update_movement", move_dict)
 		
