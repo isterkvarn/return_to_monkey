@@ -3,6 +3,7 @@ extends Node2D
 const BULLET_SPEED = 400
 var speed = Vector2()
 var parent_id
+var removed = false
 
 func set_parent_id(id):
 	parent_id = id
@@ -14,6 +15,10 @@ func _ready():
 func _process(delta):
 	translate(speed * delta)
 
+remotesync func remove():
+	removed = true
+	queue_free()
+
 func shoot(origin, angle):
 	translate(origin)
 	rotate(angle)
@@ -24,15 +29,11 @@ func _on_Area2D_area_entered(area):
 
 func _on_Area2D_body_entered(body):
 	# Collision detection
-	
-	# Colliding with a player
-	if body.has_method("hit_by_bullet"):
-		if body.has_method("get_player_id"):
-			var player_id = body.get_name()
-			if player_id != parent_id:
+	var player_id = body.get_name()
+	if player_id != parent_id:
+		# Colliding with a player
+		if body.has_method("hit_by_bullet"):
 				body.hit_by_bullet()
 				print("PLAYER")
-				
-	# Colliding with the map
-	elif body.name == "StaticBody2D":
-		print("STATIC")
+		# Colliding with the map
+		rpc("remove")
