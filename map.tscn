@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://SpawnPoints.gd" type="Script" id=1]
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://Assets/monkey/backgorund.png" type="Texture" id=3]
+[ext_resource path="res://Scoreboard.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/monkey/backgorund.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 800, 48 )
@@ -11,7 +12,7 @@ extents = Vector2( 800, 48 )
 
 [node name="background" type="Sprite" parent="."]
 position = Vector2( 0, -576 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="Players" type="Node2D" parent="."]
 
@@ -37,3 +38,5 @@ tile_data = PoolIntArray( -1179607, 0, 0, -1179606, 0, 0, -1179605, 0, 0, -11796
 [node name="ground_collision" type="CollisionShape2D" parent="ground"]
 position = Vector2( 0, 80 )
 shape = SubResource( 1 )
+
+[node name="Node2D" parent="." instance=ExtResource( 3 )]
