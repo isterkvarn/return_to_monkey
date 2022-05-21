@@ -16,9 +16,9 @@ func _process(delta):
 		var players = get_tree().get_root().get_node("main").get_node("map").get_node("Players").get_children()
 		for player in players:
 			names += player.get_node("Label").text
-			names += "		"
+			names += "\n"
 			kills += str(player.kills)
-			kills += "		"
+			kills += "\n"
 			deaths += str(player.deaths)
 			deaths += "\n"
 		get_node("Name").text = names
