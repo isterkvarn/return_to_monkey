@@ -26,7 +26,7 @@ func _on_Area2D_body_entered(body):
 	# Collision detection
 	if body.has_method("hit_by_bullet"):
 		if body.has_method("get_player_id"):
-			var player_id = body.get_player_id()
+			var player_id = body.get_name()
 			if player_id != parent_id:
 				body.hit_by_bullet()
 				print("PLAYER")
