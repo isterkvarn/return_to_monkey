@@ -35,13 +35,28 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseButton and \
 	event.pressed and bullets > 0 and is_network_master():
-		var bullet_info = {}
-		bullet_info["pos"] = global_position
-		bullet_info["angle"] = get_angle_to(get_global_mouse_position())
-		rpc("fire", bullet_info)
-		bullets -= 1
-		if bullets == 0:
-			remove_banana()
+		var angle = get_angle_to(get_global_mouse_position())
+		if Input.is_action_pressed("shotgun") and bullets > 2:
+			var spread = PI/8
+			bullet_fire_helper(global_position, angle)
+			bullet_fire_helper(global_position, angle - spread)
+			bullet_fire_helper(global_position, angle + spread)
+			
+			bullets -= 3
+		else:
+			bullet_fire_helper(global_position, angle)
+			bullets -= 1
+		bullet_checker()
+
+func bullet_checker():
+	if bullets == 0:
+		sprite_banana.hide()
+	else:
+		sprite_banana.show()
+
+func bullet_fire_helper(pos, angle):
+	rpc("fire", {"pos":pos, "angle":angle})
+
  
 master func hit_by_bullet():
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
