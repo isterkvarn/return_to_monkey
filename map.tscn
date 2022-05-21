@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://SpawnPoints.gd" type="Script" id=1]
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Assets/monkey/backgorund.png" type="Texture" id=3]
+[ext_resource path="res://BananaSpawnPoint.gd" type="Script" id=4]
+[ext_resource path="res://BananaHiveMind.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 800, 48 )
@@ -37,3 +39,26 @@ tile_data = PoolIntArray( -1179607, 0, 0, -1179606, 0, 0, -1179605, 0, 0, -11796
 [node name="ground_collision" type="CollisionShape2D" parent="ground"]
 position = Vector2( 0, 80 )
 shape = SubResource( 1 )
+
+[node name="BananaHiveMind" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="BananaSpawnPoint2" type="Position2D" parent="."]
+position = Vector2( 480, 22 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint3" type="Position2D" parent="."]
+position = Vector2( 268, -215 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint4" type="Position2D" parent="."]
+position = Vector2( -15, -181 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint5" type="Position2D" parent="."]
+position = Vector2( -180, -65 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint1" type="Position2D" parent="."]
+position = Vector2( 53, -59 )
+script = ExtResource( 4 )
