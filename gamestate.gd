@@ -1,7 +1,7 @@
 extends Node
 
 const SERVER_PORT = 10555
-const SERVER_IP = "slartibartfast.lysator.liu.se"
+const SERVER_IP = "192.168.0.102"
 const MAX_PEERS = 12
 
 var peer = null
