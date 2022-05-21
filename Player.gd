@@ -40,9 +40,10 @@ func _input(event):
 		bullet_info["angle"] = get_angle_to(get_global_mouse_position())
 		rpc("fire", bullet_info)
 		bullets -= 1
+		if bullets == 0:
+			remove_banana()
  
 master func hit_by_bullet(from):
-	print("APA NERE")
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
 	deaths += 1
 	var players = get_tree().get_root().get_node("main").get_node("map").get_node("Players").get_children()
@@ -53,6 +54,10 @@ master func hit_by_bullet(from):
 
 func pick_up_banana():
 	bullets = 3
+	sprite_banana.show()
+
+func remove_banana():
+	sprite_banana.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
