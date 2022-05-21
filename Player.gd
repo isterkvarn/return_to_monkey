@@ -23,7 +23,6 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		print("mouse clicked/unclick at: ", event.position)
 		var bulletScene = load("res://bullet.tscn")
 
 		var instance = bulletScene.instance();
@@ -69,8 +68,6 @@ func _process(delta):
 		move_dict["pos"] = position
 		move_dict["vel"] = vel
 		
-		print(name + " : " + str(is_network_master()))
-		
 		rpc_unreliable("update_movement", move_dict)
 		
 	else:
@@ -96,7 +93,9 @@ func _process(delta):
 	if not is_network_master():
 		puppet_pos = position
 
-remote func update_movement(move_dict):
-	print("move")
+remotesync func fire():
+	pass
+	
+puppet func update_movement(move_dict):
 	puppet_vel = move_dict["vel"]
 	puppet_pos = move_dict["pos"]
