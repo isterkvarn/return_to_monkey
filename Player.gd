@@ -7,11 +7,12 @@ const CEILING_FACTOR = 0.8
 const JUMP_FORCE = 400
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
+const START_BULLETS = 3
 
 const MAX_HP = 3
 const START_HP = MAX_HP
 
-
+var bullets = START_HP
 var vel = Vector2()
 var jumps = -1
 var hp = START_HP
@@ -48,6 +49,10 @@ master func hit_by_bullet(from):
 		if player.get_name() == from:
 			player.kills += 1
 
+
+func pick_up_banana():
+	bullets = 3
+	print("Bullets", bullets)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
