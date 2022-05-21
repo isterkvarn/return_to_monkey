@@ -42,7 +42,6 @@ func _process(delta):
 		jumps = DOUBLE_JUMPS
 		vel.y = 0
 		
-	print(name + " : " + str(is_network_master()))
 	
 	if is_network_master():
 		# jumps and double jumps
@@ -70,6 +69,8 @@ func _process(delta):
 		move_dict["pos"] = position
 		move_dict["vel"] = vel
 		
+		print(name + " : " + str(is_network_master()))
+		
 		rpc_unreliable("update_movement", move_dict)
 		
 	else:
@@ -96,5 +97,6 @@ func _process(delta):
 		puppet_pos = position
 
 puppet func update_movment(move_dict):
+	print("move")
 	puppet_vel = move_dict["vel"]
 	puppet_pos = move_dict["pos"]
