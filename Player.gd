@@ -10,6 +10,7 @@ const DOUBLE_JUMPS = 2
 
 var vel = Vector2()
 var jumps = -1
+onready var sprite = get_node("sprite")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -57,5 +58,19 @@ func _process(delta):
 		# -1 to stay stuck on the ceiling
 		vel.y = -1
 		vel.x *= CEILING_FACTOR
+		
+	# do animation calculation
+	if vel.x > 0.1:
+		sprite.play("running")
+		sprite.flip_h = false
+		
+	elif vel.x < -0.1:
+		sprite.play("running")
+		sprite.flip_h = true
+	else:
+		sprite.play("default")
+		
+	if not is_on_floor():
+		sprite.play("falling")
 		
 	move_and_slide(vel, Vector2.UP)
