@@ -50,7 +50,7 @@ func _input(event):
 		bullet_checker()
 	
 	# scroll up
-	if event is InputEventMouseButton and event.button_index == 4 and 2 > get_node("Camera2D").zoom.length():
+	if event is InputEventMouseButton and event.button_index == 4 and 1.5 > get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= 1/ZOOM_SPEED
 	# scroll down
 	if event is InputEventMouseButton and event.button_index == 5 and 0.1 < get_node("Camera2D").zoom.length():
