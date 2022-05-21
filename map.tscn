@@ -15,7 +15,7 @@ extents = Vector2( 28, 2956 )
 [node name="map" type="Node2D"]
 
 [node name="background" type="Sprite" parent="."]
-position = Vector2( 0, -2672 )
+position = Vector2( 0, -2676 )
 texture = ExtResource( 3 )
 
 [node name="TileMap" parent="." instance=ExtResource( 2 )]
