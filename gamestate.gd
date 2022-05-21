@@ -30,7 +30,7 @@ func _connected_ok():
 func _player_connected(id):
 	# give new peer info
 	print(str(id) + " connected")
-	rpc_id(id, "add_player", peer.get_unique_id())
+	rpc_id(id, "add_player", peer.get_unique_id(), player_name, color_hue)
 
 	
 func _player_disconnected(id):
