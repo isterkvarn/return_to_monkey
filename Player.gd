@@ -47,7 +47,7 @@ func _input(event):
 		else:
 			bullet_fire_helper(global_position, angle)
 			bullets -= 1
-		sprite_banana.show()
+		rpc("hide_banana", bullets == 0)
 	# scroll up
 	if event is InputEventMouseButton and event.button_index == 4 and 1.5 > get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= 1/ZOOM_SPEED
@@ -76,8 +76,10 @@ remote func killed(from):
 			player.kills += 1
 
 func pick_up_banana():
-	bullets = 3
-	sprite_banana.show()
+	if is_network_master():
+		bullets = 3
+		sprite_banana.show()
+		rpc("hide_banana", bullets == 0)
 
 func remove_banana():
 	sprite_banana.hide()
