@@ -15,7 +15,6 @@ func _process(delta):
 	translate(speed * delta)
 
 func shoot(origin, angle):
-	print("created bullet at", origin, "with angle", angle)
 	translate(origin)
 	rotate(angle)
 	speed = speed.rotated(angle)
