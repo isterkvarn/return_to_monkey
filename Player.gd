@@ -4,7 +4,7 @@ extends KinematicBody2D
 const MAX_SPEED = 350
 const CLIMB_SPEED = 200
 const CEILING_FACTOR = 0.8
-const JUMP_FORCE = 400
+const JUMP_FORCE = 425
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
 const START_BULLETS = 3
