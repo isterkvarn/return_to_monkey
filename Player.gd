@@ -150,6 +150,10 @@ func flip_sprites_v(flipped):
 	sprite_feet.flip_v = flipped
 	sprite_pants.flip_v = flipped
 	sprite_banana.flip_v = flipped
+	if flipped:
+		$Label.rect_position.y = 22
+	else:
+		$Label.rect_position.y = -22
 
 func flip_sprites_h(flipped):
 	sprite_body.flip_h = flipped
