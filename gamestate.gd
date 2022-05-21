@@ -44,7 +44,7 @@ remote func add_player(id):
 
 remote func remove_player(id):
 	var map = get_tree().get_root().get_node("main").get_node("map")
-	map.get_node("Players").get_node(id).queue_free()
+	map.get_node("Players").get_node(str(id)).queue_free()
 
 func join_game(new_player_name):
 	# Set up network peer
