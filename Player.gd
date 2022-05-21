@@ -74,6 +74,7 @@ func _process(delta):
 			# -1 to stay stuck on the ceiling
 			vel.y = -GRAVITY - 1
 			vel.x *= CEILING_FACTOR
+			jumps = DOUBLE_JUMPS - 1
 		
 		var move_dict = {}
 		move_dict["pos"] = position
