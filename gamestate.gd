@@ -14,6 +14,7 @@ func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
+	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
 	
 func _connected_fail():
 	print("Connection Failed")
@@ -25,8 +26,11 @@ func _player_connected(id):
 	# give new peer info
 	print(str(id) + "connected")
 	rpc_id(id, "add_player", peer.get_unique_id())
-	#add_player(id)
 
+	
+func _player_disconnected(id):
+	remove_player(id)
+	
 remote func add_player(id):
 	var map = get_tree().get_root().get_node("main").get_node("map")
 	var player = load("res://Player.tscn").instance()
@@ -37,6 +41,10 @@ remote func add_player(id):
 	player.set_network_master(id)
 	#player.position = spawn_pos
 	map.get_node("Players").add_child(player)
+
+remote func remove_player(id):
+	var map = get_tree().get_root().get_node("main").get_node("map")
+	map.get_node("Players").get_node(id).queue_free()
 
 func join_game(new_player_name):
 	# Set up network peer
