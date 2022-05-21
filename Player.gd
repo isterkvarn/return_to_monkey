@@ -7,10 +7,15 @@ const CEILING_FACTOR = 0.8
 const JUMP_FORCE = 400
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
-const ID = 1
+
+const MAX_HP = 3
+const START_HP = MAX_HP
+
 
 var vel = Vector2()
 var jumps = -1
+var hp = START_HP
+
 var puppet_pos = position
 var puppet_vel = vel
 
@@ -22,22 +27,18 @@ func _ready():
 	pass # Replace with function body.
 
 func _input(event):
-	if event is InputEventMouseButton and event.pressed:
-		print("mouse clicked/unclick at: ", event.position)
-		var bulletScene = load("res://bullet.tscn")
-
-		var instance = bulletScene.instance();
-		# Give bullet its parent id
-		instance.set_parent_id(1)
-		
-		get_tree().get_root().add_child(instance)
-		instance.shoot(global_position, get_angle_to(get_global_mouse_position()))
-
+	if event is InputEventMouseButton and event.pressed and is_network_master():
+		var bullet_info = {}
+		bullet_info["pos"] = global_position
+		bullet_info["angle"] = get_angle_to(get_global_mouse_position())
+		rpc("fire", bullet_info)
+ 
 func hit_by_bullet():
-	print("MAN DOWN")
-
-func get_player_id():
-	return ID
+	if hp == 1:
+		print("APA NERE")
+	else:
+		print("APA TRÄFFAD")
+		hp -= 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -78,8 +79,6 @@ func _process(delta):
 		move_dict["pos"] = position
 		move_dict["vel"] = vel
 		
-		print(name + " : " + str(is_network_master()))
-		
 		rpc_unreliable("update_movement", move_dict)
 		
 	else:
@@ -105,7 +104,15 @@ func _process(delta):
 	if not is_network_master():
 		puppet_pos = position
 
-remote func update_movement(move_dict):
-	print("move")
+remotesync func fire(bullet_info):
+	var bulletScene = load("res://bullet.tscn")
+	var instance = bulletScene.instance();
+	# Give bullet its parent id
+	instance.set_parent_id(get_name())
+	get_tree().get_root().add_child(instance)
+	instance.shoot(bullet_info["pos"], bullet_info["angle"])
+	
+	
+puppet func update_movement(move_dict):
 	puppet_vel = move_dict["vel"]
 	puppet_pos = move_dict["pos"]
