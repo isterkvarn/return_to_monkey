@@ -34,12 +34,11 @@ func _input(event):
 		bullet_info["angle"] = get_angle_to(get_global_mouse_position())
 		rpc("fire", bullet_info)
  
-func hit_by_bullet():
-	if hp == 1:
-		print("APA NERE")
-	else:
-		print("APA TRÄFFAD")
-		hp -= 1
+master func hit_by_bullet():
+	print("APA NERE")
+	position = get_tree().get_root().get_node("SpawnPoints").get_random_spawn_position()
+
+
 
 func pick_up_banana():
 	bullets = 3
