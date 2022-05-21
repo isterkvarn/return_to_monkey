@@ -7,6 +7,7 @@ const CEILING_FACTOR = 0.8
 const JUMP_FORCE = 400
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
+const ID = 1
 
 var vel = Vector2()
 var jumps = -1
@@ -26,8 +27,17 @@ func _input(event):
 		var bulletScene = load("res://bullet.tscn")
 
 		var instance = bulletScene.instance();
+		# Give bullet its parent id
+		instance.set_parent_id(1)
+		
 		get_tree().get_root().add_child(instance)
 		instance.shoot(global_position, get_angle_to(get_global_mouse_position()))
+
+func hit_by_bullet():
+	print("MAN DOWN")
+
+func get_player_id():
+	return ID
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
