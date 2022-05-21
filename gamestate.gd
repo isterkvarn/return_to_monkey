@@ -34,6 +34,7 @@ remote func add_player(id):
 	
 	# Init player and add to map
 	player.set_name(str(id)) # Standard ID for server
+	player.set_network_master(id)
 	#player.position = spawn_pos
 	map.get_node("Players").add_child(player)
 
