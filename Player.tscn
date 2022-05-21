@@ -41,6 +41,4 @@ script = ExtResource( 3 )
 
 [node name="sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "running"
-frame = 1
 playing = true

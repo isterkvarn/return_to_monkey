@@ -10,6 +10,10 @@ const DOUBLE_JUMPS = 2
 
 var vel = Vector2()
 var jumps = -1
+
+var puppet_pos = position
+var puppet_vel = vel
+
 onready var sprite = get_node("sprite")
 
 # Called when the node enters the scene tree for the first time.
@@ -37,27 +41,38 @@ func _process(delta):
 	else:
 		jumps = DOUBLE_JUMPS
 		vel.y = 0
-	
-	# jumps and double jumps
-	if Input.is_action_just_pressed("jump") and jumps > 0:
-		jumps -= 1
-		vel.y = -JUMP_FORCE
-	
-	# wall climbing
-	if Input.is_action_pressed("climb") and is_on_wall() and vel.y > -CLIMB_SPEED:
-		vel.y = -CLIMB_SPEED
-	
-	# normal movements
-	if Input.is_action_pressed("move_left"):
-		vel.x = -MAX_SPEED
-	if Input.is_action_pressed("move_right"):
-		vel.x = MAX_SPEED
+		
+	if is_network_master():
+		# jumps and double jumps
+		if Input.is_action_just_pressed("jump") and jumps > 0:
+			jumps -= 1
+			vel.y = -JUMP_FORCE
+		
+		# wall climbing
+		if Input.is_action_pressed("climb") and is_on_wall() and vel.y > -CLIMB_SPEED:
+			vel.y = -CLIMB_SPEED
+		
+		# normal movements
+		if Input.is_action_pressed("move_left"):
+			vel.x = -MAX_SPEED
+		if Input.is_action_pressed("move_right"):
+			vel.x = MAX_SPEED
 
-	# ceiling "walk"
-	if Input.is_action_pressed("climb") and is_on_ceiling():
-		# -1 to stay stuck on the ceiling
-		vel.y = -1
-		vel.x *= CEILING_FACTOR
+		# ceiling "walk"
+		if Input.is_action_pressed("climb") and is_on_ceiling():
+			# -1 to stay stuck on the ceiling
+			vel.y = -1
+			vel.x *= CEILING_FACTOR
+		
+		var move_dict = {}
+		move_dict["pos"] = position
+		move_dict["vel"] = vel
+		
+		rpc_unreliable("update_movement", move_dict)
+		
+	else:
+		vel = puppet_vel
+		position = puppet_pos
 		
 	# do animation calculation
 	if vel.x > 0.1:
@@ -74,3 +89,10 @@ func _process(delta):
 		sprite.play("falling")
 		
 	move_and_slide(vel, Vector2.UP)
+	
+	if not is_network_master():
+		puppet_pos = position
+
+puppet func update_movment(move_dict):
+	puppet_vel = move_dict["vel"]
+	puppet_pos = move_dict["pos"]
