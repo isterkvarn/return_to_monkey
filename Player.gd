@@ -36,7 +36,7 @@ func _input(event):
  
 master func hit_by_bullet():
 	print("APA NERE")
-	position = get_tree().get_root().get_node("map").get_node("SpawnPoints").get_random_spawn_position()
+	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
 
 
 
