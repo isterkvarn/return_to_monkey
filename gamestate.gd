@@ -75,11 +75,10 @@ func host_game(new_player_name):
 	
 func setup_map(id):
 	# Get and load map, player and spawnpoint
-	var map = load("res://map.tscn").instance()
 	var player = load("res://Player.tscn").instance()
 	#var spawn_pos = map.get_node("SpawnPoint").position
 	
-	get_tree().get_root().get_node("main").add_child(map)
+	get_tree().get_root().get_node("main").get_node("map").show()
 	get_tree().get_root().get_node("main").get_node("Control").hide()
 	
 	# Init player and add to map
@@ -89,4 +88,4 @@ func setup_map(id):
 	player.get_node("sprites").get_node("sprite_pants").modulate = Color.from_hsv(color_hue,0.8,0.9,1)
 	player.get_node("Label").set_text(player_name)
 	player.set_network_master(id)
-	map.get_node("Players").add_child(player)
+	get_tree().get_root().get_node("main").get_node("map").get_node("Players").add_child(player)
