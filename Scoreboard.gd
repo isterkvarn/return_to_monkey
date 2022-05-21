@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("scoreboard"):
+	if is_network_master() and Input.is_action_pressed("scoreboard"):
 		show()
 		var names = "Player\n"
 		var kills = "Kills\n"

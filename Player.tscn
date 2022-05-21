@@ -76,4 +76,4 @@ text = "test"
 align = 1
 
 [node name="Scoreboard" parent="." instance=ExtResource( 10 )]
-position = Vector2( 28.5783, -19.5954 )
+position = Vector2( -97.2232, -145.794 )
