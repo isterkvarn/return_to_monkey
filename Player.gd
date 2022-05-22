@@ -19,7 +19,7 @@ var banana_angle = 0
 var jumps = -1
 var hp = START_HP
 var in_noclimb = false
-var touched_launch = false
+var touched_launch = 0
 
 var kills = 0
 var deaths = 0
