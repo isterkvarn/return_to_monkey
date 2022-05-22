@@ -101,18 +101,6 @@ script = ExtResource( 4 )
 position = Vector2( 56, -424 )
 script = ExtResource( 4 )
 
-[node name="decorations" type="Node2D" parent="."]
-
-[node name="sign_l" type="Sprite" parent="decorations"]
-position = Vector2( 88, 8 )
-texture = ExtResource( 8 )
-offset = Vector2( -1050, 0 )
-
-[node name="sign_r" type="Sprite" parent="decorations"]
-position = Vector2( 88, 8 )
-texture = ExtResource( 8 )
-offset = Vector2( 1080, 0 )
-
 [node name="BananaSpawnPoint6" type="Position2D" parent="."]
 position = Vector2( 56, -424 )
 script = ExtResource( 4 )
@@ -136,6 +124,18 @@ script = ExtResource( 4 )
 [node name="BananaSpawnPoint11" type="Position2D" parent="."]
 position = Vector2( 888, -68 )
 script = ExtResource( 4 )
+
+[node name="decorations" type="Node2D" parent="."]
+
+[node name="sign_l" type="Sprite" parent="decorations"]
+position = Vector2( 88, 8 )
+texture = ExtResource( 8 )
+offset = Vector2( -1050, 0 )
+
+[node name="sign_r" type="Sprite" parent="decorations"]
+position = Vector2( 88, 8 )
+texture = ExtResource( 8 )
+offset = Vector2( 1080, 0 )
 
 [node name="bushes" parent="." instance=ExtResource( 6 )]
 modulate = Color( 1, 1, 1, 0.913725 )
