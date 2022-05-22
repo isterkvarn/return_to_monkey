@@ -8,16 +8,13 @@ const JUMP_FORCE = 425
 const GRAVITY = 20
 const DOUBLE_JUMPS = 2
 const START_BULLETS = 3
-const MAX_HP = 3
-const START_HP = MAX_HP
-const ZOOM_SPEED = 0.9;
+const ZOOM_SPEED = 0.9
 const LAUNCH_FORCE = 1000
 
 var bullets = START_BULLETS
 var vel = Vector2()
 var banana_angle = 0
 var jumps = -1
-var hp = START_HP
 var in_noclimb = false
 var touched_launch = 0
 
@@ -58,7 +55,7 @@ func _input(event):
 			bullets -= 1
 		rpc("hide_banana", bullets == 0)
 	# scroll up
-	if event is InputEventMouseButton and event.button_index == 4 and 1.5 > get_node("Camera2D").zoom.length():
+	if event is InputEventMouseButton and event.button_index == 4 and 0.8 > get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= 1/ZOOM_SPEED
 	# scroll down
 	if event is InputEventMouseButton and event.button_index == 5 and 0.1 < get_node("Camera2D").zoom.length():
