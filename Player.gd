@@ -84,7 +84,7 @@ remotesync func create_body(speed, color, death_position):
 	body.position = death_position
 	get_tree().get_root().get_node("main").get_node("map").add_child(body)
 
-remote func killed(from):
+remotesync func killed(from):
 	deaths += 1
 	var players = get_tree().get_root().get_node("main").get_node("map").get_node("Players").get_children()
 	for player in players:

@@ -34,6 +34,6 @@ func _on_Area2D_body_entered(body):
 		# Colliding with a player
 		if body.has_method("hit_by_bullet") and is_network_master():
 			body.rpc("hit_by_bullet", speed)
-			body.killed(parent_id)
+			body.rpc("killed", parent_id)
 		#	Colliding with the map
 		rpc("remove")
