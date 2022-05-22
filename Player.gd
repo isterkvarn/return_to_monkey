@@ -1,7 +1,9 @@
 extends KinematicBody2D
 
+const FAST_SPEED = 500
+const SLOW_SPEED = 350
+var MAX_SPEED = SLOW_SPEED
 
-const MAX_SPEED = 350
 const CLIMB_SPEED = 200
 const CEILING_FACTOR = 0.8
 const JUMP_FORCE = 425
@@ -114,6 +116,10 @@ func _process(delta):
 		
 	
 	if is_network_master():
+		if bullets == 0:
+			MAX_SPEED = FAST_SPEED
+		else:
+			MAX_SPEED = SLOW_SPEED
 		# jumps and double jumps
 		if Input.is_action_just_pressed("jump") and jumps > 0:
 			jumps -= 1
