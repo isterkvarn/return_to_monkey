@@ -1,14 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://SpawnPoints.gd" type="Script" id=1]
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/monkey/backgorund.png" type="Texture" id=3]
-[ext_resource path="res://BananaSpawnPoint.gd" type="Script" id=4]
-[ext_resource path="res://BananaHiveMind.gd" type="Script" id=5]
 [ext_resource path="res://bushes.tscn" type="PackedScene" id=6]
 [ext_resource path="res://No_climb_zone.gd" type="Script" id=7]
 [ext_resource path="res://Assets/monkey/sign.png" type="Texture" id=8]
 [ext_resource path="res://launchpad.tscn" type="PackedScene" id=9]
+[ext_resource path="res://BananSpawmPoint2.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1600, 48 )
@@ -78,54 +77,6 @@ shape = SubResource( 2 )
 position = Vector2( 1020, -3014.19 )
 shape = SubResource( 2 )
 
-[node name="BananaHiveMind" type="Node2D" parent="."]
-position = Vector2( 0, -64 )
-script = ExtResource( 5 )
-
-[node name="BananaSpawnPoint2" type="Position2D" parent="."]
-position = Vector2( 224, -104 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint3" type="Position2D" parent="."]
-position = Vector2( 544, -400 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint4" type="Position2D" parent="."]
-position = Vector2( -496, -384 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint5" type="Position2D" parent="."]
-position = Vector2( 845, -271 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint1" type="Position2D" parent="."]
-position = Vector2( 56, -424 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint6" type="Position2D" parent="."]
-position = Vector2( 56, -424 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint7" type="Position2D" parent="."]
-position = Vector2( 208, -591 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint8" type="Position2D" parent="."]
-position = Vector2( 126, -738 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint9" type="Position2D" parent="."]
-position = Vector2( -693, -278 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint10" type="Position2D" parent="."]
-position = Vector2( -201, -684 )
-script = ExtResource( 4 )
-
-[node name="BananaSpawnPoint11" type="Position2D" parent="."]
-position = Vector2( 888, -68 )
-script = ExtResource( 4 )
-
 [node name="decorations" type="Node2D" parent="."]
 
 [node name="sign_l" type="Sprite" parent="decorations"]
@@ -144,6 +95,53 @@ tile_data = PoolIntArray( -2752487, 4, 0, -2752486, 4, 0, -2752485, 4, 0, -27524
 
 [node name="Node2D" parent="." instance=ExtResource( 9 )]
 position = Vector2( -752, 8 )
+
+[node name="BananaSpawnPoints" type="Node2D" parent="."]
+
+[node name="Node2D" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( -94, -545 )
+
+[node name="Node2D2" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( -365, -208 )
+
+[node name="Node2D3" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( -392, 12 )
+
+[node name="Node2D4" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 128, 12 )
+
+[node name="Node2D5" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 800, -273 )
+
+[node name="Node2D6" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 561, -403 )
+
+[node name="Node2D7" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 371, -506 )
+
+[node name="Node2D8" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( -200, -681 )
+
+[node name="Node2D9" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 128, -736 )
+
+[node name="Node2D10" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 210, -593 )
+
+[node name="Node2D11" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 866, 7 )
+
+[node name="Node2D12" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( 278, -191 )
+
+[node name="Node2D13" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( -144, -182 )
+
+[node name="Node2D14" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( -501, -385 )
+
+[node name="Node2D15" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
+position = Vector2( -695, -274 )
 
 [connection signal="body_entered" from="Barrier/Area2D" to="Barrier/Area2D" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Barrier/Area2D" to="Barrier/Area2D" method="_on_Area2D_body_exited"]
