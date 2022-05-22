@@ -31,6 +31,7 @@ remotesync func activate_banana():
 remotesync func deactivate_banana():
 	$Sprite.hide()
 	isBanana = false
+	time = 0	
 
 func _on_Node2D_body_entered(body):
 	pick_up_helper(body)
@@ -38,5 +39,4 @@ func _on_Node2D_body_entered(body):
 func pick_up_helper(body):
 	if body.has_method("pick_up_banana"):
 		body.pick_up_banana()
-		time = 0
 		rpc("deactivate_banana")
