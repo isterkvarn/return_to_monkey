@@ -41,24 +41,24 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and \
-	event.pressed and event.button_index == 1 and bullets > 0 and is_network_master():
+	event.pressed and bullets > 0 and is_network_master():
 		var angle = get_angle_to(get_global_mouse_position())
-		if Input.is_action_pressed("shotgun") and bullets > 2:
+		if  event.button_index == 2 and bullets > 2:
 			var spread = PI/8
 			bullet_fire_helper(global_position, angle)
 			bullet_fire_helper(global_position, angle - spread)
 			bullet_fire_helper(global_position, angle + spread)
 			
 			bullets -= 3
-		else:
+		elif event.button_index == 1:
 			bullet_fire_helper(global_position, angle)
 			bullets -= 1
 		rpc("hide_banana", bullets == 0)
 	# scroll up
-	if event is InputEventMouseButton and event.button_index == 4 and 0.8 > get_node("Camera2D").zoom.length():
+	if event is InputEventMouseButton and event.button_index == 5 and 0.8 > get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= 1/ZOOM_SPEED
 	# scroll down
-	if event is InputEventMouseButton and event.button_index == 5 and 0.1 < get_node("Camera2D").zoom.length():
+	if event is InputEventMouseButton and event.button_index == 4 and 0.1 < get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= ZOOM_SPEED
 
 remotesync func hide_banana(hidden):
