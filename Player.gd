@@ -55,10 +55,10 @@ func _input(event):
 			bullets -= 1
 		rpc("hide_banana", bullets == 0)
 	# scroll up
-	if event is InputEventMouseButton and event.button_index == 4 and 0.8 > get_node("Camera2D").zoom.length():
+	if event is InputEventMouseButton and event.button_index == 5 and 0.8 > get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= 1/ZOOM_SPEED
 	# scroll down
-	if event is InputEventMouseButton and event.button_index == 5 and 0.1 < get_node("Camera2D").zoom.length():
+	if event is InputEventMouseButton and event.button_index == 4 and 0.1 < get_node("Camera2D").zoom.length():
 		get_node("Camera2D").zoom *= ZOOM_SPEED
 
 remotesync func hide_banana(hidden):
