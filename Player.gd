@@ -75,7 +75,7 @@ func bullet_fire_helper(pos, angle):
 
  
 master func hit_by_bullet(speed):
-	death_noise.play()
+	#death_noise.play()
 	pick_up_banana()
 	var old_position =  Vector2(global_position.x, global_position.y-20)
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
