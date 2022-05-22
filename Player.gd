@@ -16,6 +16,7 @@ var bullets = START_BULLETS
 var vel = Vector2()
 var jumps = -1
 var hp = START_HP
+var in_noclimb = false
 
 var kills = 0
 var deaths = 0
@@ -114,7 +115,7 @@ func _process(delta):
 			vel.y = -JUMP_FORCE
 		
 		# wall climbing
-		if Input.is_action_pressed("climb") and is_on_wall() and vel.y > -CLIMB_SPEED:
+		if Input.is_action_pressed("climb") and is_on_wall() and vel.y > -CLIMB_SPEED and not in_noclimb:
 			vel.y = -CLIMB_SPEED
 		
 		# normal movements
@@ -129,6 +130,7 @@ func _process(delta):
 			vel.y = -GRAVITY - 1
 			vel.x *= CEILING_FACTOR
 			jumps = DOUBLE_JUMPS 
+		
 		
 		var move_dict = {}
 		move_dict["pos"] = position
@@ -183,6 +185,9 @@ func flip_sprites_h(flipped):
 		sprite_banana.position.x = -20
 	else:
 		sprite_banana.position.x = 20
+
+func set_in_noclimb(bool_value):
+	in_noclimb = bool_value
 
 remotesync func fire(bullet_info):
 	var bulletScene = load("res://bullet.tscn")
