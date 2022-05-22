@@ -37,5 +37,5 @@ func _on_Area2D_body_entered(body):
 				body.rpc("hit_by_bullet", speed)
 			if body.has_method("killed"):
 				body.killed(parent_id)
-			# Colliding with the map
-	rpc("remove")
+		# Colliding with the map
+		rpc("remove")
