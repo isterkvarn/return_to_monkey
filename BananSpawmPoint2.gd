@@ -34,7 +34,8 @@ remotesync func deactivate_banana():
 	time = 0	
 
 func _on_Node2D_body_entered(body):
-	pick_up_helper(body)
+	if isBanana:
+		pick_up_helper(body)
 
 func pick_up_helper(body):
 	if body.has_method("pick_up_banana"):
