@@ -11,12 +11,14 @@ const START_BULLETS = 3
 const MAX_HP = 3
 const START_HP = MAX_HP
 const ZOOM_SPEED = 0.9;
+const LAUNCH_FORCE = 1000
 
 var bullets = START_BULLETS
 var vel = Vector2()
 var jumps = -1
 var hp = START_HP
 var in_noclimb = false
+var touched_launch = false
 
 var kills = 0
 var deaths = 0
@@ -131,6 +133,9 @@ func _process(delta):
 			vel.x *= CEILING_FACTOR
 			jumps = DOUBLE_JUMPS 
 		
+		if touched_launch > 0:
+			vel.y -= LAUNCH_FORCE
+			touched_launch = 0
 		
 		var move_dict = {}
 		move_dict["pos"] = position
@@ -188,6 +193,9 @@ func flip_sprites_h(flipped):
 
 func set_in_noclimb(bool_value):
 	in_noclimb = bool_value
+
+func touched_launchpad(force):
+	touched_launch = force
 
 remotesync func fire(bullet_info):
 	var bulletScene = load("res://bullet.tscn")
