@@ -79,7 +79,7 @@ master func hit_by_bullet(speed):
 remotesync func create_body(speed, color, death_position):
 	var body = load("res://dead_monkey.tscn").instance()
 	body.get_node("sprites").get_node("sprite_pants").modulate = Color.from_hsv(color,0.8,0.9,1)
-	body.set_linear_velocity(speed.clamped(1))
+	body.set_linear_velocity(speed.clamped(10))
 	body.position = death_position
 	get_tree().get_root().get_node("main").get_node("map").add_child(body)
 
