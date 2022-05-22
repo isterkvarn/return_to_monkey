@@ -168,7 +168,7 @@ func _process(delta):
 	else:
 		sprite_feet.play("default")
 		
-	if not is_on_floor():
+	if not is_on_floor() and not is_on_ceiling():
 		sprite_feet.play("falling")
 		
 	if is_on_ceiling():
@@ -194,7 +194,6 @@ func flip_sprites_v(flipped):
 	sprite_banana.flip_v = flipped
 	if flipped:
 		$Label.rect_position.y = 22
-		
 		
 		if banana_anchor.position.y != -abs(banana_anchor.position.y):
 			rotate_around(sprite_banana, banana_anchor.position, 0)
