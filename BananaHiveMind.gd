@@ -1,13 +1,13 @@
 extends Node2D
 
-const NUM_OF_POINTS = 3
+const NUM_OF_POINTS = 11
 const NAME_PREFIX = "BananaSpawnPoint"
 # Amount of time when the caviars should start blinking to warn about their despawn
 const WARNING_TIME = 25
 # Amount of time between the spawns
-const SPAWN_TIME = 1
+const SPAWN_TIME = 10
 # Amount of caviars spawning during each spawn phase
-const SPAWN_RATE = 3
+const SPAWN_RATE = 7
 
 var spawnPoints = []
 var time = 0

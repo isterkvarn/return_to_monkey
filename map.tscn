@@ -15,7 +15,7 @@ extents = Vector2( 1600, 48 )
 [sub_resource type="PhysicsMaterial" id=3]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 45, 2931.55 )
+extents = Vector2( 28, 2956 )
 
 [node name="map" type="Node2D"]
 
@@ -94,7 +94,7 @@ position = Vector2( -496, -384 )
 script = ExtResource( 4 )
 
 [node name="BananaSpawnPoint5" type="Position2D" parent="."]
-position = Vector2( 0, 16 )
+position = Vector2( 845, -271 )
 script = ExtResource( 4 )
 
 [node name="BananaSpawnPoint1" type="Position2D" parent="."]
@@ -112,6 +112,30 @@ offset = Vector2( -1050, 0 )
 position = Vector2( 88, 8 )
 texture = ExtResource( 8 )
 offset = Vector2( 1080, 0 )
+
+[node name="BananaSpawnPoint6" type="Position2D" parent="."]
+position = Vector2( 56, -424 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint7" type="Position2D" parent="."]
+position = Vector2( 208, -591 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint8" type="Position2D" parent="."]
+position = Vector2( 126, -738 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint9" type="Position2D" parent="."]
+position = Vector2( -693, -278 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint10" type="Position2D" parent="."]
+position = Vector2( -201, -684 )
+script = ExtResource( 4 )
+
+[node name="BananaSpawnPoint11" type="Position2D" parent="."]
+position = Vector2( 888, -68 )
+script = ExtResource( 4 )
 
 [node name="bushes" parent="." instance=ExtResource( 6 )]
 modulate = Color( 1, 1, 1, 0.913725 )
