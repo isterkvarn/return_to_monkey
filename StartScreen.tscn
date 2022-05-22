@@ -17,29 +17,48 @@ margin_top = -36.5
 margin_right = 350.0
 margin_bottom = 163.0
 
-[node name="HOST" type="Button" parent="VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_right = 700.0
-margin_bottom = 20.0
+text = "YO
+"
+
+[node name="HOST" type="Button" parent="VBoxContainer"]
+margin_top = 4.0
+margin_right = 700.0
+margin_bottom = 24.0
 text = "HOST"
 
 [node name="JOIN" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
+margin_top = 28.0
 margin_right = 700.0
-margin_bottom = 44.0
+margin_bottom = 48.0
 text = "JOIN"
 
 [node name="QUIT" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
+margin_top = 52.0
 margin_right = 700.0
-margin_bottom = 68.0
+margin_bottom = 72.0
 text = "QUIT"
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
-margin_top = 72.0
+margin_top = 76.0
 margin_right = 700.0
-margin_bottom = 92.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 0, 20 )
 hint_tooltip = "Enter name"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 270.0
+margin_top = 146.0
+margin_right = 759.0
+margin_bottom = 247.0
+text = "CONTROLS:
+A & D - MOVE TO SIDES
+W - CLIMB AND STAY ON THE ROOF
+LEFT CLICK - SHOOT
+RIGHT CLICK - SHOTGUN SHOOT
+MOUSE - AIM
+INPUT NAME UNDER \"QUIT\""
 
 [connection signal="pressed" from="VBoxContainer/HOST" to="." method="_on_HOST_pressed"]
 [connection signal="pressed" from="VBoxContainer/JOIN" to="." method="_on_JOIN_pressed"]
