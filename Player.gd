@@ -15,6 +15,7 @@ const LAUNCH_FORCE = 1000
 
 var bullets = START_BULLETS
 var vel = Vector2()
+var banana_angle = 0
 var jumps = -1
 var hp = START_HP
 var in_noclimb = false
@@ -25,7 +26,10 @@ var deaths = 0
 
 var puppet_pos = position
 var puppet_vel = vel
+var puppet_banana_angle = 0
 
+
+onready var sprites = get_node("sprites")
 onready var sprite_feet = get_node("sprites/sprite_feet")
 onready var sprite_body = get_node("sprites/sprite_body")
 onready var sprite_pants = get_node("sprites/sprite_pants")
@@ -131,7 +135,10 @@ func _process(delta):
 			# -1 to stay stuck on the ceiling
 			vel.y = -GRAVITY - 1
 			vel.x *= CEILING_FACTOR
-			jumps = DOUBLE_JUMPS 
+			jumps = DOUBLE_JUMPS
+		
+		# calculate banana angle
+		banana_angle = -sprites.get_node("Position2D").get_angle_to(get_global_mouse_position())
 		
 		if touched_launch > 0:
 			vel.y -= LAUNCH_FORCE
@@ -140,12 +147,14 @@ func _process(delta):
 		var move_dict = {}
 		move_dict["pos"] = position
 		move_dict["vel"] = vel
+		move_dict["banana_angle"] = banana_angle
 		
 		rpc_unreliable("update_movement", move_dict)
 		
 	else:
 		vel = puppet_vel
 		position = puppet_pos
+		banana_angle = puppet_banana_angle
 		
 	# do animation calculation
 	if vel.x > 0.1:
@@ -165,7 +174,13 @@ func _process(delta):
 		flip_sprites_v(true)
 	else:
 		flip_sprites_v(false)
-		
+	
+	if sprite_banana.flip_h:
+		banana_angle += PI
+		# banana
+		#sprite_banana.rotation = banana_angle
+	rotate_around(sprite_banana, sprites.get_node("Position2D").position, banana_angle)
+	
 	move_and_slide(vel, Vector2.UP)
 	
 	if not is_network_master():
@@ -179,17 +194,36 @@ func flip_sprites_v(flipped):
 	if flipped:
 		$Label.rect_position.y = 22
 	else:
-		$Label.rect_position.y = -22
+		$Label.rect_position.y = -225
 
 func flip_sprites_h(flipped):
 	sprite_body.flip_h = flipped
 	sprite_feet.flip_h = flipped
 	sprite_pants.flip_h = flipped
+	#var original_banana_pos = sprite_banana.position.x
+	#sprite_banana.position = Vector2(0, 0)
 	sprite_banana.flip_h = flipped
+	
 	if flipped:
-		sprite_banana.position.x = -20
+		if sprites.get_node("Position2D").position.x != -abs(sprites.get_node("Position2D").position.x):
+			sprites.get_node("Position2D").position.x = -abs(sprites.get_node("Position2D").position.x)
+			sprite_banana.position.x = -20
+			sprite_banana.position.y = -1
+			sprite_banana.rotation = 0
 	else:
-		sprite_banana.position.x = 20
+		if sprites.get_node("Position2D").position.x != abs(sprites.get_node("Position2D").position.x):
+			sprites.get_node("Position2D").position.x = abs(sprites.get_node("Position2D").position.x)
+			sprite_banana.position.x = 20
+			sprite_banana.position.y = -1
+			sprite_banana.rotation = 0
+
+func rotate_around(obj, point, angle):
+	var rot = angle + obj.rotation
+	var tStart = point
+	obj.global_translate (-tStart)
+	obj.transform = obj.transform.rotated(-rot)
+	obj.global_translate (tStart)
+
 
 func set_in_noclimb(bool_value):
 	in_noclimb = bool_value
@@ -209,3 +243,4 @@ remotesync func fire(bullet_info):
 puppet func update_movement(move_dict):
 	puppet_vel = move_dict["vel"]
 	puppet_pos = move_dict["pos"]
+	puppet_banana_angle = move_dict["banana_angle"]
