@@ -8,7 +8,8 @@ onready var pad_3 = get_node("pad_3/BounceArea")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("set force")
-	pad_3.launch_force = 3000
+	pad_3.launch_force = 1500
+	pad_2.launch_force = 800
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
