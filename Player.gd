@@ -142,7 +142,7 @@ func _process(delta):
 		banana_angle = -banana_anchor.get_angle_to(get_global_mouse_position())
 		
 		if touched_launch > 0:
-			vel.y -= LAUNCH_FORCE
+			vel.y -= touched_launch
 			touched_launch = 0
 		
 		var move_dict = {}

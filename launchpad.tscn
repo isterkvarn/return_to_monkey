@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://BounceArea.gd" type="Script" id=1]
-[ext_resource path="res://Assets/icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/monkey/lanuchpad.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 5 )
@@ -26,7 +26,6 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 12 )
-scale = Vector2( 1, 0.375 )
 texture = ExtResource( 2 )
 
 [connection signal="body_entered" from="BounceArea" to="BounceArea" method="_on_BounceArea_body_entered"]
