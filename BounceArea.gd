@@ -1,21 +1,7 @@
 extends Area2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+var launch_force = 1000
 
 func _on_BounceArea_body_entered(body):
 	if body.has_method("touched_launchpad"):
-		body.touched_launchpad()
+		body.touched_launchpad(launch_force)
