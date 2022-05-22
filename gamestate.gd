@@ -88,4 +88,5 @@ func setup_map(id):
 	player.get_node("sprites").get_node("sprite_pants").modulate = Color.from_hsv(color_hue,0.8,0.9,1)
 	player.get_node("Label").set_text(player_name)
 	player.set_network_master(id)
+	player.position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()
 	get_tree().get_root().get_node("main").get_node("map").get_node("Players").add_child(player)

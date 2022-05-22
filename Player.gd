@@ -17,6 +17,7 @@ var vel = Vector2()
 var banana_angle = 0
 var jumps = -1
 var hp = START_HP
+var in_noclimb = false
 
 var kills = 0
 var deaths = 0
@@ -118,7 +119,7 @@ func _process(delta):
 			vel.y = -JUMP_FORCE
 		
 		# wall climbing
-		if Input.is_action_pressed("climb") and is_on_wall() and vel.y > -CLIMB_SPEED:
+		if Input.is_action_pressed("climb") and is_on_wall() and vel.y > -CLIMB_SPEED and not in_noclimb:
 			vel.y = -CLIMB_SPEED
 		
 		# normal movements
@@ -136,6 +137,7 @@ func _process(delta):
 		
 		# calculate banana angle
 		banana_angle = -sprites.get_node("Position2D").get_angle_to(get_global_mouse_position())
+		
 		
 		var move_dict = {}
 		move_dict["pos"] = position
@@ -217,6 +219,9 @@ func rotate_around(obj, point, angle):
 	obj.transform = obj.transform.rotated(-rot)
 	obj.global_translate (tStart)
 
+
+func set_in_noclimb(bool_value):
+	in_noclimb = bool_value
 
 remotesync func fire(bullet_info):
 	var bulletScene = load("res://bullet.tscn")
