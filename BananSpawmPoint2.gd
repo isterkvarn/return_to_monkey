@@ -11,8 +11,6 @@ func _ready():
 	pass
 
 func _process(delta):
-	var overlapping_bodies = get_overlapping_bodies()
-	
 	# Spawn a new banana
 	if not isBanana and time > RESPAWNTIME:
 		isBanana = true
@@ -22,17 +20,23 @@ func _process(delta):
 	elif not isBanana and time < RESPAWNTIME:
 		time += delta
 	# There is banana so check for players to give it to
-	else:
-		if overlapping_bodies.size() != 0:
-			if overlapping_bodies[0].has_method("pick_up_banana"):
-				overlapping_bodies[0].pick_up_banana()
-				time = 0
-				isBanana = false
-				rpc("deactivate_banana")
+		
 
 remotesync func activate_banana():
 	$Sprite.show()
+	var overlapping_bodies = get_overlapping_bodies()
+	if overlapping_bodies.size() != 0:
+		pick_up_helper(overlapping_bodies[0])
 
 remotesync func deactivate_banana():
 	$Sprite.hide()
 
+func _on_Node2D_body_entered(body):
+	pick_up_helper(body)
+
+func pick_up_helper(body):
+	if body.has_method("pick_up_banana"):
+		body.pick_up_banana()
+		time = 0
+		isBanana = false
+		rpc("deactivate_banana")
