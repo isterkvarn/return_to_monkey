@@ -38,4 +38,4 @@ func _on_Area2D_body_entered(body):
 			if body.has_method("killed"):
 				body.killed(parent_id)
 			# Colliding with the map
-			rpc("remove")
+	rpc("remove")
