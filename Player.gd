@@ -34,6 +34,7 @@ onready var sprite_feet = get_node("sprites/sprite_feet")
 onready var sprite_body = get_node("sprites/sprite_body")
 onready var sprite_pants = get_node("sprites/sprite_pants")
 onready var sprite_banana = get_node("sprites/sprite_banana")
+onready var banana_anchor = get_node("sprites/Position2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -138,7 +139,7 @@ func _process(delta):
 			jumps = DOUBLE_JUMPS
 		
 		# calculate banana angle
-		banana_angle = -sprites.get_node("Position2D").get_angle_to(get_global_mouse_position())
+		banana_angle = -banana_anchor.get_angle_to(get_global_mouse_position())
 		
 		if touched_launch > 0:
 			vel.y -= LAUNCH_FORCE
@@ -178,8 +179,8 @@ func _process(delta):
 	if sprite_banana.flip_h:
 		banana_angle += PI
 		# banana
-		#sprite_banana.rotation = banana_angle
-	rotate_around(sprite_banana, sprites.get_node("Position2D").position, banana_angle)
+	#sprite_banana.rotation = banana_angle
+	rotate_around(sprite_banana, banana_anchor.position, banana_angle)
 	
 	move_and_slide(vel, Vector2.UP)
 	
@@ -193,9 +194,24 @@ func flip_sprites_v(flipped):
 	sprite_banana.flip_v = flipped
 	if flipped:
 		$Label.rect_position.y = 22
+		
+		
+		if banana_anchor.position.y != -abs(banana_anchor.position.y):
+			rotate_around(sprite_banana, banana_anchor.position, 0)
+			banana_anchor.position.y = -abs(banana_anchor.position.y)
+			#sprite_banana.rotation = 0
+			sprite_banana.position.y = 1
+		
 	else:
-		$Label.rect_position.y = -225
-
+		$Label.rect_position.y = -22
+		
+		if banana_anchor.position.y != abs(banana_anchor.position.y):
+			rotate_around(sprite_banana, banana_anchor.position, 0)
+			banana_anchor.position.y = abs(banana_anchor.position.y)
+			#sprite_banana.rotation = 0
+			sprite_banana.position.y = -1
+		
+		
 func flip_sprites_h(flipped):
 	sprite_body.flip_h = flipped
 	sprite_feet.flip_h = flipped
@@ -205,17 +221,17 @@ func flip_sprites_h(flipped):
 	sprite_banana.flip_h = flipped
 	
 	if flipped:
-		if sprites.get_node("Position2D").position.x != -abs(sprites.get_node("Position2D").position.x):
-			sprites.get_node("Position2D").position.x = -abs(sprites.get_node("Position2D").position.x)
+		if banana_anchor.position.x != -abs(banana_anchor.position.x):
+			rotate_around(sprite_banana, banana_anchor.position, 0)
+			banana_anchor.position.x = -abs(banana_anchor.position.x)
+			#sprite_banana.rotation = 0
 			sprite_banana.position.x = -20
-			sprite_banana.position.y = -1
-			sprite_banana.rotation = 0
 	else:
-		if sprites.get_node("Position2D").position.x != abs(sprites.get_node("Position2D").position.x):
-			sprites.get_node("Position2D").position.x = abs(sprites.get_node("Position2D").position.x)
+		if banana_anchor.position.x != abs(banana_anchor.position.x):
+			rotate_around(sprite_banana, banana_anchor.position, 0)
+			banana_anchor.position.x = abs(banana_anchor.position.x)
+			#sprite_banana.rotation = 0
 			sprite_banana.position.x = 20
-			sprite_banana.position.y = -1
-			sprite_banana.rotation = 0
 
 func rotate_around(obj, point, angle):
 	var rot = angle + obj.rotation
