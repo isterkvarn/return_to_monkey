@@ -1,7 +1,7 @@
 extends Node
 
 const SERVER_PORT = 10555
-const SERVER_IP = "192.168.0.102"
+const SERVER_IP = ""
 const MAX_PEERS = 12
 
 var peer = null
@@ -53,10 +53,10 @@ remote func remove_player(id):
 	var map = get_tree().get_root().get_node("main").get_node("map")
 	map.get_node("Players").get_node(str(id)).queue_free()
 
-func join_game(new_player_name):
+func join_game(new_player_name, ip):
 	# Set up network peer
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_client(SERVER_IP, SERVER_PORT)
+	peer.create_client(ip, SERVER_PORT)
 	get_tree().set_network_peer(peer)
 	# setup map
 	if new_player_name != "":

@@ -3,13 +3,14 @@ extends Control
 
 
 func _on_HOST_pressed():
-	var player_name = $VBoxContainer/TextEdit.text
+	var player_name = $VBoxContainer/VBoxContainer/text_name.text
 	Gamestate.host_game(player_name)
 
 
 func _on_JOIN_pressed():
-	var player_name = $VBoxContainer/TextEdit.text
-	Gamestate.join_game(player_name)
+	var player_name = $VBoxContainer/VBoxContainer/text_name.text
+	var ip = $VBoxContainer/VBoxContainer2/text_ip/.text
+	Gamestate.join_game(player_name, ip)
 
 
 func _on_QUIT_pressed():
