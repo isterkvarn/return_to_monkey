@@ -34,6 +34,7 @@ onready var sprite_body = get_node("sprites/sprite_body")
 onready var sprite_pants = get_node("sprites/sprite_pants")
 onready var sprite_banana = get_node("sprites/sprite_banana")
 onready var banana_anchor = get_node("sprites/Position2D")
+onready var death_noise = get_node("sprites/death_noise")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -74,6 +75,7 @@ func bullet_fire_helper(pos, angle):
 
  
 master func hit_by_bullet(speed):
+	death_noise.play()
 	pick_up_banana()
 	var old_position =  Vector2(global_position.x, global_position.y-20)
 	position = get_tree().get_root().get_node("main").get_node("map").get_node("SpawnPoints").get_random_spawn_position()

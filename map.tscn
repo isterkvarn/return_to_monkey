@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://SpawnPoints.gd" type="Script" id=1]
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/monkey/backgorund.png" type="Texture" id=3]
 [ext_resource path="res://LaunchPads.gd" type="Script" id=4]
+[ext_resource path="res://Assets/return_to_monkey.mp3" type="AudioStream" id=5]
 [ext_resource path="res://bushes.tscn" type="PackedScene" id=6]
 [ext_resource path="res://No_climb_zone.gd" type="Script" id=7]
 [ext_resource path="res://Assets/monkey/sign.png" type="Texture" id=8]
@@ -147,6 +148,10 @@ position = Vector2( -501, -385 )
 
 [node name="Node2D15" parent="BananaSpawnPoints" instance=ExtResource( 10 )]
 position = Vector2( -695, -274 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
 
 [connection signal="body_entered" from="Barrier/Area2D" to="Barrier/Area2D" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Barrier/Area2D" to="Barrier/Area2D" method="_on_Area2D_body_exited"]

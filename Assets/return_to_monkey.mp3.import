@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/return_to_monkey.mp3-8c3ff27f17e99f1fac907b2dab0df205.mp3str"
+
+[deps]
+
+source_file="res://Assets/return_to_monkey.mp3"
+dest_files=[ "res://.import/return_to_monkey.mp3-8c3ff27f17e99f1fac907b2dab0df205.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
