@@ -30,7 +30,7 @@ func _connected_ok():
 func _player_connected(id):
 	# give new peer info
 	print(str(id) + " connected")
-	rpc_id(id, "add_player", peer.get_unique_id(), player_name, color_hue)
+	#rpc_id(id, "add_player", peer.get_unique_id(), player_name, color_hue)
 
 	
 func _player_disconnected(id):
@@ -68,10 +68,13 @@ func host_game(new_player_name):
 	peer = NetworkedMultiplayerENet.new()
 	peer.create_server(SERVER_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
+	get_tree().get_root().get_node("main").get_node("map").show()
+	get_tree().get_root().get_node("main").get_node("Control").hide()
+	
 	# setup map
-	if new_player_name != "":
-		player_name = new_player_name
-	setup_map(peer.get_unique_id())
+	#if new_player_name != "":
+		#player_name = new_player_name
+	#setup_map(peer.get_unique_id())
 	
 func setup_map(id):
 	# Get and load map, player and spawnpoint

@@ -1,6 +1,8 @@
 extends Control
 
 
+func _ready():
+	Gamestate.host_game("server")
 
 func _on_HOST_pressed():
 	var player_name = $VBoxContainer/VBoxContainer/text_name.text
